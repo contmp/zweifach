@@ -13,7 +13,7 @@ Quickstart
 ----------
 
 - Add 'zweifach' to INSTALLED_APPS.
-- Add 'zweifach.middleware.ZweifachMiddleware' to MIDDLEWARE, *after' AuthenticationMiddleware.
+- Add 'zweifach.middleware.ZweifachMiddleware' to MIDDLEWARE, *after* AuthenticationMiddleware.
 - Inlcude 'zweifach.urls' somewhere in your url-config.
 - Install 'django-otp' from PyPI and configure as described further down below
 - Install 'qrcode' from PyPI to make QR-codes from django-otp work as expected
@@ -26,7 +26,7 @@ settings.ZWEIFACH_AUTH_REQUIRED
 
     default: []
 
-    A list of checks which determines, if a user needs 2FA to use its account.
+    A list of checks which determine, if a user needs 2FA to use its account.
 
     examaple:
 
@@ -50,19 +50,21 @@ settings.ZWEIFACH_URL_EXCLUDES
         '/faq/how-to-setup-2fa/',
     ]
 
+Note: If a url is accessible without login, it can of course still be viewed without any 2FA interaction.
+
 
 Notes about django-otp configuration
 ------------------------------------
 
 A compatible installation of django-otp should be setup as follows:
 
-Add to INSTALLED_APPS:
+Add to INSTALLED_APPS::
 
     'django_otp',
     'django_otp.plugins.otp_totp',
     'django_otp.plugins.otp_static',
 
-Add to MIDDLEWARE (between AuthenticationMiddleware and ZweifachMiddleware):
+Add to MIDDLEWARE (between AuthenticationMiddleware and ZweifachMiddleware)::
 
     'django_otp.middleware.OTPMiddleware'
 
