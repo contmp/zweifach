@@ -30,7 +30,7 @@ def setup(request):
     device = TOTPDevice.objects.get_or_create(
         user=request.user,
         confirmed=False,
-        defaults={"name": f"{request.user.username}'s device"},
+        defaults={"name": "auto-generated device"},
     )[0]
 
     # display QR-Code (provided as base64 string, so we don't need any url configuration)

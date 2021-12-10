@@ -12,11 +12,11 @@ Integration of two factor auth is enforced by a middleware which will ensure two
 Quickstart
 ----------
 
+- Install packages by running 'pip install zweifach django-otp qrcode'
 - Add 'zweifach' to INSTALLED_APPS.
 - Add 'zweifach.middleware.ZweifachMiddleware' to MIDDLEWARE, *after* AuthenticationMiddleware.
 - Inlcude 'zweifach.urls' somewhere in your url-config.
-- Install 'django-otp' from PyPI and configure as described further down below
-- Install 'qrcode' from PyPI to make QR-codes from django-otp work as expected
+- Configure django-otp as described further down below
 
 
 Settings
@@ -28,7 +28,7 @@ settings.ZWEIFACH_AUTH_REQUIRED
 
     A list of checks which determine, if a user needs 2FA to use its account.
 
-    examaple:
+    examaple::
 
     ZWEIFACH_AUTH_REQUIRED = [
         lambda user: user.is_staff,  # all staff unsers must use two factor auth
@@ -43,7 +43,7 @@ settings.ZWEIFACH_URL_EXCLUDES
     A list of url which are always accessible without 2FA.
     Verify and Setup views are always excluded as well as settings.LOGIN_URL and the admin login view, if admin is enabled.
 
-    example:
+    example::
 
     ZWEIFACH_URL_EXCLUDES = [
         '/imprint/',
