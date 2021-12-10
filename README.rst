@@ -30,10 +30,10 @@ settings.ZWEIFACH_AUTH_REQUIRED
 
     examaple::
 
-    ZWEIFACH_AUTH_REQUIRED = [
-        lambda user: user.is_staff,  # all staff unsers must use two factor auth
-        lambda user: '2fa' in user.groups.values_list("name", flat=True),  # all users in group '2fa' must use two factor auth
-    ]
+        ZWEIFACH_AUTH_REQUIRED = [
+            lambda user: user.is_staff,  # all staff unsers must use two factor auth
+            lambda user: '2fa' in user.groups.values_list("name", flat=True),  # all users in group '2fa' must use two factor auth
+        ]
 
 
 settings.ZWEIFACH_URL_EXCLUDES
@@ -45,10 +45,10 @@ settings.ZWEIFACH_URL_EXCLUDES
 
     example::
 
-    ZWEIFACH_URL_EXCLUDES = [
-        '/imprint/',
-        '/faq/how-to-setup-2fa/',
-    ]
+        ZWEIFACH_URL_EXCLUDES = [
+            '/imprint/',
+            '/faq/how-to-setup-2fa/',
+        ]
 
 Note: If a url is accessible without login, it can of course still be viewed without any 2FA interaction.
 
@@ -91,3 +91,7 @@ Ensure basic code style with::
 Build package with::
 
     python3 -m build
+
+Upload package to PyPI::
+
+    python3 -m twine upload dist/zweifach-x.x.x*
