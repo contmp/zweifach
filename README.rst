@@ -68,6 +68,10 @@ Add to MIDDLEWARE (between AuthenticationMiddleware and ZweifachMiddleware)::
 
     'django_otp.middleware.OTPMiddleware'
 
+Configure issuer::
+
+    OTP_TOTP_ISSUER = 'MyProject'
+
 
 Usage
 -----
