@@ -34,6 +34,7 @@ def excluded_urls():
 
 class ZweifachMiddleware:
     """
+    - Convince 2FA is required.
     - Enforce 2FA, if user has it configured.
     - Enforce 2FA-Setup, if user is required to use it.
     """
@@ -46,21 +47,19 @@ class ZweifachMiddleware:
 
         if request.path not in self.excluded_urls:
 
-            if two_factor_auth_required(
-                request.user
-            ) and not two_factor_auth_configured(request.user):
+            if not two_factor_auth_required(request.user):
+                return self.get_response(request)
+
+            is_configured = two_factor_auth_configured(request.user)
+
+            if not is_configured:
                 return redirect(
-                    reverse('zweifach_setup')
-                    + f'?next={urlencode(request.get_full_path())}'
+                    reverse('zweifach_setup') + f'?next={urlencode(request.get_full_path())}'
                 )
 
-            if (
-                two_factor_auth_configured(request.user)
-                and not request.user.is_verified()
-            ):
+            if not request.user.is_verified():
                 return redirect(
-                    reverse('zweifach_verify')
-                    + f'?next={urlencode(request.get_full_path())}'
+                    reverse('zweifach_verify') + f'?next={urlencode(request.get_full_path())}'
                 )
 
         return self.get_response(request)
