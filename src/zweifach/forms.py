@@ -4,7 +4,7 @@ from django import forms
 
 
 class VerifyForm(forms.Form):
-    code = forms.CharField()
+    code = forms.CharField(widget=forms.TextInput(attrs={'autofocus': 'autofocus'}))
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop("request")
